@@ -11,6 +11,8 @@
    
 2. Submit the Solution. (Code should build and run without any errors. Check before making the push.)
    
-3. Submissions made after the deadline will not be considered, even if it is good. Initiate your pull request before the deadline. 
+3. Submissions made after the deadline will not be considered, even if it is good. Initiate your pull request before the deadline.
+
+4. ** All submissions must be individual. Strictly No Team Submissions and No Discussions other than general doubts regarding the system. ** 
 
 ### Submit/Push the Code and the diagram to the same git repository as a new branch with "YourName"-"ProblemName" as branch name. Don't push anything to the master branch. Initiate a Pull Request with YourName in the Description.
