@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace StudentManagement
 {
-    public class RootDetails
+    public class RootDetails : Courses
     {
-        public string CourseName { get; set; }
+        public Course Course { get; set; }
         public DateTime EnrolledDate { get; set; }
 
+        public bool[] Topics = new bool[10];
         public List<Payments> PaymentDetails = new List<Payments>();
 
         static List<bool> _attendance = new List<bool>();
@@ -21,15 +22,12 @@ namespace StudentManagement
                 return _attendance;
             }
         }
-
         static public void AddAtt(bool val)
         {
             _attendance.Add(val);
         }
 
-        public bool[] Topics = new bool[10];
-
-        public void DaysPresent(List<int> LeaveDays, int totalDays)
+        public void AttendanceData(List<int> LeaveDays, int totalDays)
         {
             for (int i = 0; i < totalDays; i++)
             {
@@ -39,7 +37,7 @@ namespace StudentManagement
                     AddAtt(true);
             }
         }
-        public bool[] TopicsCoverd(List<int> CoverdTopics)
+        public bool[] TopicsCoveredData(List<int> CoverdTopics)
         {
             bool[] FilledCoverdTopics = new bool[10];
             foreach (int TopicIndex in CoverdTopics)

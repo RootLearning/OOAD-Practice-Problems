@@ -10,12 +10,12 @@ namespace StudentManagement
     {
         static public void PrintDetails(Student ob, int totalDays)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(ob.Name + "\t\t" + ob.Email + "\t\t" + ob.Phone + "\n");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(ob.Degree.Course);
 
-            if (ob.Degree.CompletedStatus)
+            if (ob.Degree.CompletionStatus)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(" [ Completed ]");
@@ -28,73 +28,92 @@ namespace StudentManagement
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\t" + ob.Degree.CollegeName + " - " + ob.Degree.Location);
             PrintAttendance(ob.RootIT.Attendance, totalDays);
-            PrintPaymentDetails(ob.RootIT.CourseName, ob.RootIT.PaymentDetails);
-            PrintTopicDetails(ob.RootIT.CourseName, ob.RootIT.Topics);
+            PrintPaymentDetails(ob.RootIT.Course, ob.RootIT.PaymentDetails);
+            PrintTopicDetails(ob.RootIT.Course, ob.RootIT.Topics);
         }
-        static void PrintTopicDetails(string courseName, bool[] topicDetails)
+        static void PrintTopicDetails(RootDetails.Course course, bool[] topicDetails)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n" + courseName + "\n");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("\n" + course +"   [ Topics Covered ]"+"\n");
             Console.ResetColor();
             for (int i = 0; i < topicDetails.Length; i++)
             {
                 if (topicDetails[i])
                 {
-                    Console.Write("Topic_" + (i + 1) + " - ");
+                    Console.Write("Topic -" + (i + 1) + " - ");
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.Write("YES\n");
+                    Console.Write("YES\t");
                     Console.ResetColor();
                 }
                 else
                 {
-                    Console.Write("Topic_" + (i + 1) + " - ");
+                    Console.Write("Topic -" + (i + 1) + " - ");
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("NO\n");
+                    Console.Write("NO\t");
                     Console.ResetColor();
                 }
+                if(i % 2 == 0)
+                    Console.WriteLine("\t");
 
             }
         }
-        static void PrintPaymentDetails(string courseName, List<Payments> paymentDetails)
+        static void PrintPaymentDetails(RootDetails.Course courseName, List<Payments> paymentDetails)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("\n\nPayment Details\t");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write("\n\nPayment Details\t:\t");
             Console.ResetColor();
-            Console.Write(courseName + "[15000]\n");
+            Console.WriteLine("\n\t"+courseName +" - "+(int)courseName+"\n");
 
             foreach (Payments item in paymentDetails)
-                Console.WriteLine(item.Date.ToShortDateString() + " - " + item.Money);
+                Console.WriteLine("\t"+item.Date.ToShortDateString() + " - " + item.Money+"rs");
+
+            int FeesPaid = (int)paymentDetails.Sum(o => o.Money);
+            Console.Write("\t");
+            if(FeesPaid < (int)courseName)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Fees Pending\t|\t" + ((int)courseName - FeesPaid));
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Paid Fully");
+            }
+            Console.ResetColor();
         }
         static void PrintAttendance(List<bool> attendanceReport, int totalDays)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("\n\nAttendance");
             Console.ResetColor();
 
             int ForNextLine = 0;
             int AbsentCount = 0;
+            Console.Write("\n\t");
             foreach (bool item in attendanceReport)
             {
                 ForNextLine++;
                 if (item)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.Write("X");
+                    Console.Write("X   ");
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     AbsentCount++;
-                    Console.Write("0");
+                    Console.Write("0   ");
                 }
                 if (ForNextLine == 7)
                 {
                     Console.WriteLine();
+                    Console.Write("\t");
                     ForNextLine = 0;
                 }
             }
             Console.ResetColor();
-            Console.WriteLine("\n" + (totalDays - AbsentCount) + " / " + AbsentCount);
+            Console.WriteLine("\n\tTotal Days....:"+ totalDays);
+            Console.WriteLine("\tAbsent........:"+ AbsentCount);
         }
     }
 }

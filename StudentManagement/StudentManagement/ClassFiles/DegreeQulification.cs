@@ -11,7 +11,7 @@ namespace StudentManagement
         public string CollegeName { get; set; }
         public string Location { get; set; }
         public string Course { get; set; }
-        public bool CompletedStatus { get; set; }
+        public bool CompletionStatus { get; set; }
 
         public DegreeQulification()
         {

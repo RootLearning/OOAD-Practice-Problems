@@ -43,14 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DegreeQulification.cs" />
-    <Compile Include="EducationDetails.cs" />
-    <Compile Include="Payments.cs" />
-    <Compile Include="PrintStatements.cs" />
+    <Compile Include="ClassFiles\Courses.cs" />
+    <Compile Include="ClassFiles\DegreeQulification.cs" />
+    <Compile Include="ClassFiles\EducationDetails.cs" />
+    <Compile Include="ClassFiles\Payments.cs" />
+    <Compile Include="Methods\PrintStatements.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RootDetails.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="ClassFiles\RootDetails.cs" />
+    <Compile Include="ClassFiles\Student.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
