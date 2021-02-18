@@ -15,4 +15,4 @@
 
 4. **All Submissions must be Individual. Strictly No Team Submissions and No Discussions, Other than General Doubts regarding the System.** 
 
-### Submit/Push the Code and the diagram to the same git repository as a new branch with "YourName"-"ProblemName" as branch name. Don't push anything to the master branch. Initiate a Pull Request with YourName in the Description.
+### Submit/Push the Code and the diagram to the same git repository as a new branch with "YourName"-"StudentManagement" as branch name. Don't push anything to the master/main branch. Initiate a Pull Request with YourName in the Description.
