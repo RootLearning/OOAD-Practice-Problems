@@ -8,10 +8,13 @@ namespace StudentManagement
 {
     public class RootDetails : Courses
     {
-        public Course Course { get; set; }
+        public Course SelectedCourse
+        {
+            get; set;
+        }
+
         public DateTime EnrolledDate { get; set; }
 
-        public bool[] Topics = new bool[10];
         public List<Payments> PaymentDetails = new List<Payments>();
 
         static List<bool> _attendance = new List<bool>();
@@ -37,12 +40,6 @@ namespace StudentManagement
                     AddAtt(true);
             }
         }
-        public bool[] TopicsCoveredData(List<int> CoverdTopics)
-        {
-            bool[] FilledCoverdTopics = new bool[10];
-            foreach (int TopicIndex in CoverdTopics)
-                FilledCoverdTopics[TopicIndex - 1] = true;
-            return FilledCoverdTopics;
-        }
+        
     }
 }

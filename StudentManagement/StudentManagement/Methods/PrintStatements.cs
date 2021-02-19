@@ -11,7 +11,7 @@ namespace StudentManagement
         static public void PrintDetails(Student ob, int totalDays)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(ob.Name + "\t\t" + ob.Email + "\t\t" + ob.Phone + "\n");
+            Console.WriteLine(ob.Name + "\t\t" + ob.Email + "\t\t" + ob.Phone);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(ob.Degree.Course);
 
@@ -26,41 +26,44 @@ namespace StudentManagement
                 Console.Write("[ On Going ]");
             }
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("\t" + ob.Degree.CollegeName + " - " + ob.Degree.Location);
+            Console.Write("\t-  " + ob.Degree.CollegeName + " - " + ob.Degree.Location);
             PrintAttendance(ob.RootIT.Attendance, totalDays);
-            PrintPaymentDetails(ob.RootIT.Course, ob.RootIT.PaymentDetails);
-            PrintTopicDetails(ob.RootIT.Course, ob.RootIT.Topics);
+            PrintPaymentDetails(ob.RootIT.SelectedCourse, ob.RootIT.PaymentDetails);
+            PrintTopicDetails(ob.RootIT.TopicHisotry);
         }
-        static void PrintTopicDetails(RootDetails.Course course, bool[] topicDetails)
+        static void PrintTopicDetails(List<Topics> topicHistoy)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("\n" + course +"   [ Topics Covered ]"+"\n");
-            Console.ResetColor();
-            for (int i = 0; i < topicDetails.Length; i++)
+            Console.Write("\nTopics Coverd\t:\n");
+            foreach (var item in topicHistoy)
             {
-                if (topicDetails[i])
+                if (item.TopicFrom.Equals(Topics.From.IN))
                 {
-                    Console.Write("Topic -" + (i + 1) + " - ");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write("[in] "+item.Topic);
+                }
+                else if (item.TopicFrom.Equals(Topics.From.OUT))
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("[out] " + item.Topic);
+                }
+                if(item.IsCovered.Equals(Topics.Status.YES))
+                {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.Write("YES\t");
-                    Console.ResetColor();
+                    Console.Write("\t-  YES");
                 }
-                else
+                else if(item.IsCovered.Equals(Topics.Status.NO))
                 {
-                    Console.Write("Topic -" + (i + 1) + " - ");
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.Write("NO\t");
-                    Console.ResetColor();
+                    Console.Write("\t-  NO");
                 }
-                if(i % 2 == 0)
-                    Console.WriteLine("\t");
-
+                Console.WriteLine();
             }
         }
         static void PrintPaymentDetails(RootDetails.Course courseName, List<Payments> paymentDetails)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write("\n\nPayment Details\t:\t");
+            Console.Write("\nPayment Details\t:\t");
             Console.ResetColor();
             Console.WriteLine("\n\t"+courseName +" - "+(int)courseName+"\n");
 
@@ -84,7 +87,7 @@ namespace StudentManagement
         static void PrintAttendance(List<bool> attendanceReport, int totalDays)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("\n\nAttendance");
+            Console.WriteLine("\n\nAttendance\t:");
             Console.ResetColor();
 
             int ForNextLine = 0;
